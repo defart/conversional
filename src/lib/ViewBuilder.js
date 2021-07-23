@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentFactory, {componentTypes} from "./ComponentFactory";
+import ComponentFactory, {componentTypes, CT_MODAL} from "./ComponentFactory";
 
 
 const parseComponentType = (config) => {
@@ -11,15 +11,14 @@ const parseComponentType = (config) => {
 };
 
 
-//@todo: put modals into array, and add them at the root level component
-const createComponentTree = (config, isRootComponent = true, key = null) => {
+const createComponentTree = (config, isRootComponent = true, key = null, modalComponents = []) => {
     const type = parseComponentType(config);
 
     // handle children
     let children = null;
     if (config.Children && Object.keys(config.Children).length) {
         children = Object.keys(config.Children)
-            .map(k => createComponentTree(config.Children[k], false, k))
+            .map(k => createComponentTree(config.Children[k], false, k, modalComponents))
     }
 
     const RenderedComponent = ComponentFactory({
@@ -30,9 +29,15 @@ const createComponentTree = (config, isRootComponent = true, key = null) => {
     });
 
     if (isRootComponent) {
-        return function TreeView() { return <RenderedComponent/> };
+        return function TreeView() { return <>
+            <RenderedComponent key={"rootComponent"}/>
+            { modalComponents.map((ModalComp, i) => <ModalComp key={i} />) }
+            </>};
+    } else if (type === CT_MODAL ) {
+        modalComponents.push(RenderedComponent);
+        return null;
     }
-    return <RenderedComponent />;
+    return <RenderedComponent key={key} />;
 };
 
 export const buildViewFromConfig = (configStr) => {
