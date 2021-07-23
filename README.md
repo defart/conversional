@@ -30,3 +30,11 @@ The button/link the triggers the function registered for an identifier using the
 
 ### Running
 ``` yarn install && yarn start``` should do the trick
+
+## What's missing
+1. No tests due to the fact that it's a interview question, but all the parts should be pretty testable
+2. Error handling isn't the best
+3. I'm not sure should this have been rendered on serverside? It should also be trivial to transfer to a server.
+4. Components are all defined in one file, due to them being examples, in a real situation they would be in their own files.
+
+Hopefully the project shows a decent enough architecture, and clean coding style.
