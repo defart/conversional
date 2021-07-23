@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentFactory, {componentTypes} from "../components/ComponentFactory";
+import ComponentFactory, {componentTypes} from "./ComponentFactory";
 
 
 const parseComponentType = (config) => {
@@ -12,15 +12,19 @@ const parseComponentType = (config) => {
 
 
 //@todo: put modals into array, and add them at the root level component
-const createComponentTree = (config, isRootComponent = true) => {
+const createComponentTree = (config, isRootComponent = true, key = null) => {
     const type = parseComponentType(config);
+
+    // handle children
     let children = null;
     if (config.Children && Object.keys(config.Children).length) {
-        children = Object.keys(config.Children).map(k => createComponentTree(config.Children[k], false))
+        children = Object.keys(config.Children)
+            .map(k => createComponentTree(config.Children[k], false, k))
     }
 
     const RenderedComponent = ComponentFactory({
         type,
+        key,
         props: config.Content.props || {},
         children
     });
