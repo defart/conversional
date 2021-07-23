@@ -1,17 +1,22 @@
+import React from 'react';
 import './App.css';
 import ConfigSelection from "./ConfigSelection";
 import RenderArea from "./RenderArea";
+import {buildViewFromConfig} from "./lib/ViewBuilder";
+import {useState} from "react";
 
 function App() {
-
+const [render, setRender] = useState(null);
   const handleRenderRequest = conf  => {
-      alert(conf);
+      const RenderedTree = buildViewFromConfig(conf);
+      console.log('RT', RenderedTree)
+      setRender(<RenderedTree />)
   };
 
   return (
     <div className="App">
         <ConfigSelection onConfigChange={config => handleRenderRequest(config)} />
-        <RenderArea />
+        <RenderArea>{render}</RenderArea>
     </div>
   );
 }

@@ -16,7 +16,7 @@ const ConfigSelection = ({onConfigChange}) => {
             </select>
         </div>
         <div className="config-area">
-            <textarea value={config} onChange={e => setConfig(e.target.value)} rows={50} cols={25}></textarea>
+            <textarea value={config} onChange={e => setConfig(e.target.value)} rows={32} cols={25}></textarea>
         </div>
         <div className="config-controls">
             <button type="button" onClick={ () => onConfigChange(config) }>Generate view</button>
