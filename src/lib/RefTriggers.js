@@ -29,5 +29,3 @@ const useModRefTriggers = () => {
 };
 
 export default useModRefTriggers;
-
-window.refs = refTriggers;

@@ -1,7 +1,6 @@
 import React from 'react'
 import ComponentFactory, {componentTypes, CT_MODAL} from "./ComponentFactory";
 
-
 const parseComponentType = (config) => {
     const type = ( config.Content && config.Content.type) || undefined;
     if (!type || !componentTypes.includes(type)) {
@@ -9,7 +8,6 @@ const parseComponentType = (config) => {
     }
     return type;
 };
-
 
 const createComponentTree = (config, isRootComponent = true, key = null, modalComponents = []) => {
     const type = parseComponentType(config);
