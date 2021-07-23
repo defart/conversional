@@ -9,7 +9,6 @@ function App() {
 const [render, setRender] = useState(null);
   const handleRenderRequest = conf  => {
       const RenderedTree = buildViewFromConfig(conf);
-      console.log('RT', RenderedTree)
       setRender(<RenderedTree />)
   };
 

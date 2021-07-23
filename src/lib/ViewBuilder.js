@@ -24,12 +24,15 @@ const createComponentTree = (config, isRootComponent = true, key = null) => {
 
     const RenderedComponent = ComponentFactory({
         type,
-        key,
+        key: isRootComponent ? 'Root' : key,
         props: config.Content.props || {},
         children
     });
 
-    return isRootComponent ? () => <RenderedComponent /> : <RenderedComponent />;
+    if (isRootComponent) {
+        return function TreeView() { return <RenderedComponent/> };
+    }
+    return <RenderedComponent />;
 };
 
 export const buildViewFromConfig = (configStr) => {
