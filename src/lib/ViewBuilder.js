@@ -39,7 +39,12 @@ const createComponentTree = (config, isRootComponent = true, key = null, modalCo
 };
 
 export const buildViewFromConfig = (configStr) => {
-    return createComponentTree(JSON.parse(configStr));
+    try {
+        return createComponentTree(JSON.parse(configStr));
+    } catch (e) {
+        console.error(e);
+        return () => <h1>:( Something went wrong! It's probably the JSON. Please check the console for more clues.</h1>
+    }
 };
 
 
