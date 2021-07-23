@@ -18,11 +18,16 @@ export const ListComponent = ({li}) => {
     }</ul>
 };
 
-export const ModalComponent = ({isOpen,children,  height = '400px', width = '600px', onClose = () => null }) => {
+export const ModalComponent = ({isOpen,children,  height = 400, width = 600, onClose = () => null }) => {
     const [openState, setOpenState] = useState(isOpen);
     useEffect(() => {
         setOpenState(isOpen)
     }, [isOpen]);
 
-    return <Rodal visible={openState} onClose={() => { setOpenState(false); onClose()} }>{children}</Rodal>
+    return <Rodal
+        width={parseInt(width)} // parse int cause config incoming w&h are in px format
+        height={parseInt(height)}
+        visible={openState}
+        onClose={() => { setOpenState(false); onClose()} }
+    >{children}</Rodal>
 };
