@@ -25,7 +25,7 @@ export const withModRefModal = (Component) => {
 
         useEffect(() => {
             refs.register(props.modRef, triggerOn);
-            return refs.unregister(props.modRef);
+            return () => refs.unregister(props.modRef);
         }, [props, refs, triggerOn]);
 
         return <Component {...props} isOpen={modRefOpen} onClose={() => setModRefOpen(false)}>{props.children}</Component>

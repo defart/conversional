@@ -12,7 +12,7 @@ class RefTriggers {
 
     unregister(ref) {
         if (this.triggers[ref]) {
-            delete this.triggers[ref]();
+            delete this.triggers[ref];
         }
     }
 
